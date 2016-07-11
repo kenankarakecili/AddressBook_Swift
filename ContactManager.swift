@@ -48,12 +48,9 @@ class ContactManager {
       showContactExistsAlert(existingContact)
       return
     }
-    let processSuccessful = performAddingContact()
-    if processSuccessful {
-      showMessageOnly(Message.Success.rawValue)
-    } else {
-      showMessageOnly(Message.Error.rawValue)
-    }
+    let success = performAddingContact()
+    let message = success ? Message.Success.rawValue : Message.Error.rawValue
+    showMessageOnly(message)
   }
   
   private func checkIfExist() -> ABRecordRef? {
