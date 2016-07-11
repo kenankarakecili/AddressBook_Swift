@@ -19,9 +19,9 @@ class ContactManager {
   }
   
   enum Message: String {
-    case Success = "Rehberinize eklenmiştir."
-    case Error = "Ayarlardan uygulamanın rehbere erişimine izin veriniz."
-    case AlreadyHave = "rehberinizde zaten kayıtlıdır."
+    case Success = "Contact added successfully."
+    case Error = "You need to enable access to the contacts in settings."
+    case AlreadyHave = "is already in your contacts."
   }
   
   private var contactItem: ContactItem?
