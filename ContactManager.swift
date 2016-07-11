@@ -1,5 +1,5 @@
 //
-//  ContactManager.swift
+//  KKContactManager.swift
 //
 //  Created by Kenan Karakecili on 06/05/16.
 //  Copyright © 2016 Kenan Karakecili. All rights reserved.
@@ -8,7 +8,7 @@
 import UIKit
 import AddressBook
 
-class ContactManager {
+class KKContactManager {
   
   struct ContactItem {
     let name: String
