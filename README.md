@@ -13,5 +13,5 @@ let contactToAdd = ContactManager.ContactItem(name: name,
                                               phone: item.mobile,
                                               email: item.email,
                                               image: decodeBase64ToImage(item.picture))
-  ContactManager().addContact(contactToAdd)
+ContactManager().addContact(contactToAdd)
 ```
