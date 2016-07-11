@@ -13,5 +13,5 @@ let contactToAdd = KKContactManager.ContactItem(name: name,
                                                 phone: item.mobile,
                                                 email: item.email,
                                                 image: decodeBase64ToImage(item.picture))
-  KKContactManager().addContact(contactToAdd)
+  ContactManager().addContact(contactToAdd)
 ```
