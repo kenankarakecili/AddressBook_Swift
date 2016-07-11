@@ -3,7 +3,7 @@ A manager class that can add a new contact to the contact list in iPhone.
 
 #Importing
 
-Just copy the **ContactManager.swift** file somewhere in your project.
+Just copy the ```ContactManager.swift``` file somewhere in your project.
 
 #Usage
 
