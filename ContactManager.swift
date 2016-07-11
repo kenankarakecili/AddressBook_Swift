@@ -10,21 +10,25 @@ import AddressBook
 
 class ContactManager {
   
-  enum Message: String {
-    case Success = "Contact added successfully."
-    case Error = "You need to enable access to the contacts in settings."
-    case AlreadyHave = "is already in your contacts."
+  struct ContactItem {
+    let name: String
+    let lastname: String
+    let phone: String?
+    let email: String?
+    let image: UIImage?
   }
   
-  private var item = (name: "", lastname: "", phone: "", email: "", image: UIImage(named: ""))
+  enum Message: String {
+    case Success = "Rehberinize eklenmiştir."
+    case Error = "Ayarlardan uygulamanın rehbere erişimine izin veriniz."
+    case AlreadyHave = "rehberinizde zaten kayıtlıdır."
+  }
+  
+  private var contactItem: ContactItem?
   private var addressBookRef: ABAddressBook?
   
-  func addContact(name: String, lastname: String, phone: String, email: String, image: UIImage?) {
-    item.name = name
-    item.lastname = lastname
-    item.phone = phone
-    item.email = email
-    item.image = image
+  func addContact(contactItem: ContactItem) {
+    self.contactItem = contactItem
     let authorizationStatus = ABAddressBookGetAuthorizationStatus()
     switch authorizationStatus {
     case .Denied:
@@ -56,30 +60,32 @@ class ContactManager {
     let allContacts = ABAddressBookCopyArrayOfAllPeople(addressBookRef).takeRetainedValue() as [ABRecordRef]
     for contact in allContacts {
       let contactName = ABRecordCopyCompositeName(contact).takeRetainedValue() as String
-      if contactName == "\(item.name) \(item.lastname)" {
+      guard let myContactItem = contactItem else { return .None }
+      if contactName == "\(myContactItem.name) \(myContactItem.lastname)" {
         return contact
       }
     }
-    return nil
+    return .None
   }
   
   private func showContactExistsAlert(contact: ABRecordRef) {
-    let contactName = ABRecordCopyValue(contact, kABPersonFirstNameProperty).takeRetainedValue() as? String ?? item.name
-    showMessageOnly("\(contactName) \(Message.AlreadyHave.rawValue)")
+    guard let myContactItem = contactItem else { return }
+    showMessageOnly("\(myContactItem.name) \(myContactItem.lastname) \(Message.AlreadyHave.rawValue)")
   }
   
   private func performAddingContact() -> Bool {
+    guard let myContactItem = contactItem else { return false }
     let contactToAdd = ABPersonCreate().takeRetainedValue()
-    ABRecordSetValue(contactToAdd, kABPersonFirstNameProperty, item.name, nil)
-    ABRecordSetValue(contactToAdd, kABPersonLastNameProperty, item.lastname, nil)
-    if let myImage = item.image {
+    ABRecordSetValue(contactToAdd, kABPersonFirstNameProperty, myContactItem.name, nil)
+    ABRecordSetValue(contactToAdd, kABPersonLastNameProperty, myContactItem.lastname, nil)
+    if let myImage = myContactItem.image {
       ABPersonSetImageData(contactToAdd, UIImagePNGRepresentation(myImage), nil)
     }
     let phoneNumbers = ABMultiValueCreateMutable(ABPropertyType(kABMultiStringPropertyType)).takeRetainedValue()
-    ABMultiValueAddValueAndLabel(phoneNumbers, item.phone, kABPersonPhoneMainLabel, nil)
+    ABMultiValueAddValueAndLabel(phoneNumbers, myContactItem.phone, kABPersonPhoneMainLabel, nil)
     ABRecordSetValue(contactToAdd, kABPersonPhoneProperty, phoneNumbers, nil)
     let emails = ABMultiValueCreateMutable(ABPropertyType(kABMultiStringPropertyType)).takeRetainedValue()
-    ABMultiValueAddValueAndLabel(emails, item.email, kABWorkLabel, nil)
+    ABMultiValueAddValueAndLabel(emails, myContactItem.email, kABWorkLabel, nil)
     ABRecordSetValue(contactToAdd, kABPersonEmailProperty, emails, nil)
     ABAddressBookAddRecord(addressBookRef, contactToAdd, nil)
     if ABAddressBookHasUnsavedChanges(addressBookRef) {
@@ -93,16 +99,13 @@ class ContactManager {
   }
   
   private func promptForAddressBookAccess() {
+    guard let myContactItem = contactItem else { return }
     ABAddressBookRequestAccessWithCompletion(addressBookRef) { (granted, error) in
       dispatch_async(dispatch_get_main_queue()) {
         if granted == false {
           showMessageOnly(Message.Error.rawValue)
         } else {
-          self.addContact(self.item.name,
-                          lastname: self.item.lastname,
-                          phone: self.item.phone,
-                          email: self.item.email,
-                          image: self.item.image)
+          self.addContact(myContactItem)
         }
       }
     }
