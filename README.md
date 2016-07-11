@@ -8,10 +8,10 @@ Just copy the ```ContactManager.swift``` file somewhere in your project.
 #Usage
 
 ```
-let contactToAdd = ContactManager.ContactItem(name: name,
-                                              lastname: lastname!,
-                                              phone: item.mobile,
-                                              email: item.email,
-                                              image: decodeBase64ToImage(item.picture))
+let contactToAdd = ContactManager.ContactItem(name: "Kenan",
+                                              lastname: "Karakecili",
+                                              phone: "+90 555 290 53 94",
+                                              email: "kenankarakecili@icloud.com",
+                                              image: myPicture)
 ContactManager().addContact(contactToAdd)
 ```
