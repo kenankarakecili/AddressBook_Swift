@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="AddressBookSample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upG1z" translatesAutoresizingMaskIntoConstraints="NO" id="MDI-xj-GeR">
+                                <rect key="frame" x="100" y="28" width="120" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="Gvh-N1-lrg"/>
+                                    <constraint firstAttribute="width" constant="120" id="Xsk-D3-5Xw"/>
+                                </constraints>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7OA-cz-nB8">
+                                <rect key="frame" x="20" y="164" width="280" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="BpI-xO-VY1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Lastname" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3cA-nQ-2et">
+                                <rect key="frame" x="20" y="202" width="280" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="fKz-Pw-VNV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JyH-A2-k7q">
+                                <rect key="frame" x="20" y="240" width="280" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="jRu-6D-tpE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qeA-nO-E8h">
+                                <rect key="frame" x="20" y="278" width="280" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="cBS-lp-ZhJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="anT-u1-srN">
+                                <rect key="frame" x="90" y="324" width="140" height="30"/>
+                                <color key="backgroundColor" red="0.12941176470588234" green="0.58823529411764708" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Umt-F8-OH3"/>
+                                    <constraint firstAttribute="width" constant="140" id="dEo-4F-luy"/>
+                                </constraints>
+                                <state key="normal" title="Add Contact">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addContactButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AAA-cc-Uv9"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="qeA-nO-E8h" secondAttribute="trailing" constant="20" id="02d-B5-ZpA"/>
+                            <constraint firstItem="JyH-A2-k7q" firstAttribute="top" secondItem="3cA-nQ-2et" secondAttribute="bottom" constant="8" id="68T-Ao-9rG"/>
+                            <constraint firstItem="MDI-xj-GeR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="A2j-8o-eka"/>
+                            <constraint firstAttribute="trailing" secondItem="JyH-A2-k7q" secondAttribute="trailing" constant="20" id="BFw-lD-7ql"/>
+                            <constraint firstItem="anT-u1-srN" firstAttribute="top" secondItem="qeA-nO-E8h" secondAttribute="bottom" constant="16" id="CJD-gA-J4Y"/>
+                            <constraint firstAttribute="trailing" secondItem="7OA-cz-nB8" secondAttribute="trailing" constant="20" id="Hxf-lQ-MLn"/>
+                            <constraint firstItem="3cA-nQ-2et" firstAttribute="top" secondItem="7OA-cz-nB8" secondAttribute="bottom" constant="8" id="RsX-hm-hNc"/>
+                            <constraint firstItem="7OA-cz-nB8" firstAttribute="top" secondItem="MDI-xj-GeR" secondAttribute="bottom" constant="16" id="SBi-qj-GKp"/>
+                            <constraint firstItem="anT-u1-srN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="SS6-db-EAx"/>
+                            <constraint firstItem="7OA-cz-nB8" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="Umc-G3-wAt"/>
+                            <constraint firstAttribute="trailing" secondItem="3cA-nQ-2et" secondAttribute="trailing" constant="20" id="V1l-Ax-JNR"/>
+                            <constraint firstItem="MDI-xj-GeR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Y1T-uj-ZnV"/>
+                            <constraint firstItem="JyH-A2-k7q" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="ach-HX-EwD"/>
+                            <constraint firstItem="qeA-nO-E8h" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="gsT-lp-1P0"/>
+                            <constraint firstItem="qeA-nO-E8h" firstAttribute="top" secondItem="JyH-A2-k7q" secondAttribute="bottom" constant="8" id="mMi-Oy-EHk"/>
+                            <constraint firstItem="3cA-nQ-2et" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="vDC-jq-rQk"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="emailField" destination="qeA-nO-E8h" id="MFz-4K-f78"/>
+                        <outlet property="lastnameField" destination="3cA-nQ-2et" id="DcO-m9-0hq"/>
+                        <outlet property="nameField" destination="7OA-cz-nB8" id="txi-5I-HsK"/>
+                        <outlet property="phoneField" destination="JyH-A2-k7q" id="u9r-wl-rob"/>
+                        <outlet property="profileImageView" destination="MDI-xj-GeR" id="5iE-Dc-7i2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="149" y="319"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="upG1z" width="660" height="660"/>
+    </resources>
+</document>
