@@ -1,7 +1,7 @@
 # KKAddressBook-Swift
 A manager class that can add a new contact to the contact list in iPhone.
 
-![alt tag](https://raw.githubusercontent.com/KenanKarakecili/KKAddressBook-Swift/master/Untitled.mov)
+![alt tag](https://raw.githubusercontent.com/KenanKarakecili/KKAddressBook-Swift/master/Untitled.gif)
 
 #Importing
 
