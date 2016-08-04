@@ -18,7 +18,7 @@ class KKAddressBook {
     let image: UIImage?
   }
   
-  enum Message: String {
+  private enum Message: String {
     case Success = "Contact added successfully."
     case Error = "You need to enable access to the contacts in settings."
     case AlreadyHave = "is already in your contacts."
