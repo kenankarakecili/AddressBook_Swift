@@ -33,7 +33,6 @@ class KKAddressBook {
     switch authorizationStatus {
     case .Denied:
       ViewController().showMessageOnly(Message.Error.rawValue)
-      
     case .Authorized:
       addressBookRef = ABAddressBookCreateWithOptions(nil, nil).takeRetainedValue()
       addItemToContacts()
@@ -57,7 +56,8 @@ class KKAddressBook {
   private func checkIfExist() -> ABRecordRef? {
     let allContacts = ABAddressBookCopyArrayOfAllPeople(addressBookRef).takeRetainedValue() as [ABRecordRef]
     for contact in allContacts {
-      let contactName = ABRecordCopyCompositeName(contact).takeRetainedValue() as String
+      guard let compositeName = ABRecordCopyCompositeName(contact) else { continue }
+      let contactName = compositeName.takeRetainedValue() as String
       guard let myContactItem = contactItem else { return .None }
       if contactName == "\(myContactItem.name) \(myContactItem.lastname)" {
         return contact
