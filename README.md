@@ -2,7 +2,7 @@
 A manager class that can add a new contact to the contact list in iPhone.
 
 <kbd>
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://youtu.be/KhQM15QfVTA)
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/KhQM15QfVTA/0.jpg)](https://youtu.be/KhQM15QfVTA)
 </kbd>
 
 #Importing
