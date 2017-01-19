@@ -18,32 +18,32 @@ class KKAddressBook {
     let image: UIImage?
   }
   
-  private enum Message: String {
+  fileprivate enum Message: String {
     case Success = "Contact added successfully."
     case Error = "You need to enable access to the contacts in settings."
     case AlreadyHave = "is already in your contacts."
   }
   
-  private var contactItem: ContactItem?
-  private var addressBookRef: ABAddressBook?
+  fileprivate var contactItem: ContactItem?
+  fileprivate var addressBookRef: ABAddressBook?
   
-  func addContact(contactItem: ContactItem) {
+  func addContact(_ contactItem: ContactItem) {
     self.contactItem = contactItem
     let authorizationStatus = ABAddressBookGetAuthorizationStatus()
     switch authorizationStatus {
-    case .Denied:
+    case .denied:
       ViewController().showMessageOnly(Message.Error.rawValue)
-    case .Authorized:
+    case .authorized:
       addressBookRef = ABAddressBookCreateWithOptions(nil, nil).takeRetainedValue()
       addItemToContacts()
-    case .NotDetermined:
+    case .notDetermined:
       promptForAddressBookAccess()
     default:
       break
     }
   }
   
-  private func addItemToContacts() {
+  fileprivate func addItemToContacts() {
     if let existingContact = checkIfExist() {
       showContactExistsAlert(existingContact)
       return
@@ -53,37 +53,37 @@ class KKAddressBook {
     ViewController().showMessageOnly(message)
   }
   
-  private func checkIfExist() -> ABRecordRef? {
-    let allContacts = ABAddressBookCopyArrayOfAllPeople(addressBookRef).takeRetainedValue() as [ABRecordRef]
+  fileprivate func checkIfExist() -> ABRecord? {
+    let allContacts = ABAddressBookCopyArrayOfAllPeople(addressBookRef).takeRetainedValue() as [ABRecord]
     for contact in allContacts {
       guard let compositeName = ABRecordCopyCompositeName(contact) else { continue }
       let contactName = compositeName.takeRetainedValue() as String
-      guard let myContactItem = contactItem else { return .None }
+      guard let myContactItem = contactItem else { return .none }
       if contactName == "\(myContactItem.name) \(myContactItem.lastname)" {
         return contact
       }
     }
-    return .None
+    return .none
   }
   
-  private func showContactExistsAlert(contact: ABRecordRef) {
+  fileprivate func showContactExistsAlert(_ contact: ABRecord) {
     guard let myContactItem = contactItem else { return }
     ViewController().showMessageOnly("\(myContactItem.name) \(myContactItem.lastname) \(Message.AlreadyHave.rawValue)")
   }
   
-  private func performAddingContact() -> Bool {
+  fileprivate func performAddingContact() -> Bool {
     guard let myContactItem = contactItem else { return false }
     let contactToAdd = ABPersonCreate().takeRetainedValue()
-    ABRecordSetValue(contactToAdd, kABPersonFirstNameProperty, myContactItem.name, nil)
-    ABRecordSetValue(contactToAdd, kABPersonLastNameProperty, myContactItem.lastname, nil)
+    ABRecordSetValue(contactToAdd, kABPersonFirstNameProperty, myContactItem.name as CFTypeRef!, nil)
+    ABRecordSetValue(contactToAdd, kABPersonLastNameProperty, myContactItem.lastname as CFTypeRef!, nil)
     if let myImage = myContactItem.image {
-      ABPersonSetImageData(contactToAdd, UIImagePNGRepresentation(myImage), nil)
+      ABPersonSetImageData(contactToAdd, UIImagePNGRepresentation(myImage) as CFData!, nil)
     }
     let phoneNumbers = ABMultiValueCreateMutable(ABPropertyType(kABMultiStringPropertyType)).takeRetainedValue()
-    ABMultiValueAddValueAndLabel(phoneNumbers, myContactItem.phone, kABPersonPhoneMainLabel, nil)
+    ABMultiValueAddValueAndLabel(phoneNumbers, myContactItem.phone as CFTypeRef!, kABPersonPhoneMainLabel, nil)
     ABRecordSetValue(contactToAdd, kABPersonPhoneProperty, phoneNumbers, nil)
     let emails = ABMultiValueCreateMutable(ABPropertyType(kABMultiStringPropertyType)).takeRetainedValue()
-    ABMultiValueAddValueAndLabel(emails, myContactItem.email, kABWorkLabel, nil)
+    ABMultiValueAddValueAndLabel(emails, myContactItem.email as CFTypeRef!, kABWorkLabel, nil)
     ABRecordSetValue(contactToAdd, kABPersonEmailProperty, emails, nil)
     ABAddressBookAddRecord(addressBookRef, contactToAdd, nil)
     if ABAddressBookHasUnsavedChanges(addressBookRef) {
@@ -96,10 +96,10 @@ class KKAddressBook {
     return true
   }
   
-  private func promptForAddressBookAccess() {
+  fileprivate func promptForAddressBookAccess() {
     guard let myContactItem = contactItem else { return }
     ABAddressBookRequestAccessWithCompletion(addressBookRef) { (granted, error) in
-      dispatch_async(dispatch_get_main_queue()) {
+      DispatchQueue.main.async {
         if granted == false {
           ViewController().showMessageOnly(Message.Error.rawValue)
         } else {

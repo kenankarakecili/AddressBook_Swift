@@ -16,7 +16,7 @@ class ViewController: UIViewController {
   @IBOutlet weak var phoneField: UITextField!
   @IBOutlet weak var emailField: UITextField!
 
-  @IBAction func addContactButtonAction(sender: UIButton) {
+  @IBAction func addContactButtonAction(_ sender: UIButton) {
     if !checkFields() { return }
     let contactToAdd = KKAddressBook.ContactItem(name: nameField.text!,
                                                  lastname: lastnameField.text!,
@@ -37,12 +37,12 @@ class ViewController: UIViewController {
     return true
   }
   
-  func showMessageOnly(message: String) {
+  func showMessageOnly(_ message: String) {
     let alert = UIAlertController(title: "",
                                   message: message,
-                                  preferredStyle: .Alert)
-    alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
-    presentViewController(alert, animated: true, completion: nil)
+                                  preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+    present(alert, animated: true, completion: nil)
   }
   
 }
